@@ -576,7 +576,6 @@ function setCardDetail(obj) {
     } else {
         endDate.innerHTML = '--'
     }
-    console.log(obj)
 }
 
 //设置卡片时间
@@ -595,16 +594,24 @@ function formatDate() {
 
 //对从数据库取回的数组按照时间进行冒泡排序
 function bubblingSort(obj) {
+    //如果某个库中没有卡片，则返回
+    if(obj.length < 1) return
+    //把字符串格式的时间转换为毫秒数
+    obj.map((cardObj) => {
+        Date.parse(cardObj.createDate)
+    })
+    //冒泡排序
     let temp
     for (let i = 0; i < obj.length - 1; i++) {
         for (let j = 0; j < obj.length - 1 - i; j++) {
-            if (obj[j].date > obj[j+1].date) {
+            if (obj[j].createDate < obj[j+1].createDate) {
                 temp = obj[j+1]
                 obj[j+1] = obj[j]
                 obj[j] = temp
             }
         }
     }
+
 }
 
 //控制右键菜单按钮的显示，根据所在区域不同，右键菜单显示的按钮不同
