@@ -597,10 +597,10 @@ function formatDate() {
 function bubblingSort(obj) {
     let temp
     for (let i = 0; i < obj.length - 1; i++) {
-        for (let j = i + 1; j < obj.length; j++) {
-            if (obj[i].date > obj[j].date) {
-                temp = obj[i]
-                obj[i] = obj[j]
+        for (let j = 0; j < obj.length - 1 - i; j++) {
+            if (obj[j].date > obj[j+1].date) {
+                temp = obj[j+1]
+                obj[j+1] = obj[j]
                 obj[j] = temp
             }
         }
