@@ -1,0 +1,28 @@
+.cards {
+  margin-top: 20px;
+  width: 1200px;
+  /* border: 1px solid #ccc; */
+}
+.cards-box {
+  width: 1200px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.img {
+  width: 300px;
+}
+a{
+    line-height: 0;
+}
+.card {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  padding-top: 10px;
+}
