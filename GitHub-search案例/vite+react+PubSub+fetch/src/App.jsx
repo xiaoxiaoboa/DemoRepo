@@ -1,8 +1,8 @@
-import React, { Component } from "react"
-import Search from "./components/Search"
-import List from "./components/List"
+import React, { Component } from 'react'
+import Search from './Components/Search'
+import List from './Components/List'
 
-import "./App.css"
+import './App.css'
 
 export default class App extends Component {
   render() {

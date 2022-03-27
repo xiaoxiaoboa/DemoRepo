@@ -1,38 +1,37 @@
 import React, { Component } from "react"
 import PubSub from "pubsub-js"
-
 import "./index.css"
 
 export default class List extends Component {
   //初始化state
   state = {
-    users: [], //users信息
-    isFirst: true, //是否第一次打开页面
-    isLoading: false, //是否在加载中
-    err: "" //请求的错误信息
+    users: [],
+    isFirst: true,
+    isLoading: false,
+    err: ""
   }
 
-  //组件挂在完成后，订阅消息
+  //组件挂载后订阅消息
   componentDidMount() {
-    this.token = PubSub.subscribe("hello", (msg, stateObj) => {
-      this.setState(stateObj)
+    this.token = PubSub.subscribe("hello", (msg, data) => {
+      this.setState(data)
     })
   }
 
-  //即将卸载组件时，取消订阅
+  //组件卸载前，取消订阅
   componentWillUnmount() {
     PubSub.unsubscribe(this.token)
   }
-
+  
   render() {
     const { users, isFirst, isLoading, err } = this.state
     return (
       <div className="cards">
         <div className="cards-box">
           {isFirst ? (
-            <h2>输入名字进行搜索</h2>
+            <h2>输出关键词，然后搜索</h2>
           ) : isLoading ? (
-            <h2>正在搜索....</h2>
+            <h2>Loading....</h2>
           ) : err ? (
             <h2 style={{ color: "red" }}>{err}</h2>
           ) : (

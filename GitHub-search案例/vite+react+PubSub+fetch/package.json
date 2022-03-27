@@ -1,5 +1,5 @@
 {
-  "name": "reactdemo",
+  "name": "react-demo",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -8,7 +8,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^0.26.1",
     "pubsub-js": "^1.9.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
