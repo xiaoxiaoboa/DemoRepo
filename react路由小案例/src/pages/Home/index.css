@@ -1,0 +1,29 @@
+.msg{
+    font-size: 30px;
+}
+.placeholder-home{
+    height: 50px;
+}
+.placeholder2-home{
+    height: 10px;
+}
+.news-box{
+    display: flex;
+    flex-direction: column;
+}
+.nav-list{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-list li>a{
+    border-radius: 3px;
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-list li:not(:nth-last-child(1)){
+    margin-right: 20px;
+}
