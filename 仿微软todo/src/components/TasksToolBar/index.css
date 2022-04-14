@@ -1,0 +1,30 @@
+.toolbar{
+    height: 80px;
+}
+
+.title-tool{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    padding: 12px 18px 0 18px;
+}
+.title-container{
+    flex: 1 1 0;
+}
+.tool-container{
+    /* font-size: 18px; */
+    padding: 6px 8px 6px 6px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 3px;
+}
+.tool-container:hover{
+    background-color: #edebe9;
+}
+.sort{
+    color: #807775;
+}
