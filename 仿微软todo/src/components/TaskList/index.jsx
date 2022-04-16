@@ -1,23 +1,33 @@
 import React, { useState } from "react"
+import {nanoid} from "nanoid"
 import "./index.css"
 
 export default function TaskList(props) {
   /* 接收props，mark标志了是谁正在使用这个组件 （important | oneday | tomorrow */
   const { mark } = props
+
   /* 初始化useState，管理tasks数据 */
   const [task, setTask] = useState({
-    oneday: [{ id: 1, text: "今天周五，我在图书馆写代码" }]
+    oneday: []
   })
 
   /* 处理用户输入的tsak，并更新state */
-  function getTask(e) {
+  function AddTask(e) {
     const { target, keyCode } = e
+
     /* 如果按下的按键不是回车键，或者输入的内容为空的话，不执行下步操作 */
     if (keyCode !== 13 || target.value.trim() === "") return
+
     /* 一个task数组 */
-    const taskObj = {id:2, text: target.value}
+    const taskObj = { id: nanoid(), text: target.value }
+
     /* 更新对应mark的state， */
-    setTask({[mark]:[taskObj, ...task[mark]]})
+    setTask({ [mark]: [taskObj, ...task[mark]] })
+
+    /* 清空输入框 */
+    target.value = ""
+
+    /* 存入localStorage */
   }
   return (
     <div className="taskcontainer">
@@ -29,7 +39,7 @@ export default function TaskList(props) {
             </svg>
           </div>
           <div className="Add-input">
-            <input type="text" placeholder="添加任务" onKeyUp={getTask} />
+            <input type="text" placeholder="添加任务" onKeyUp={AddTask} />
           </div>
         </div>
         <div className="AddFunc">
