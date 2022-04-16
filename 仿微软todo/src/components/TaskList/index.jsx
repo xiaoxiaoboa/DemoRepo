@@ -1,7 +1,24 @@
-import React from "react"
+import React, { useState } from "react"
 import "./index.css"
 
-export default function TaskList() {
+export default function TaskList(props) {
+  /* 接收props，mark标志了是谁正在使用这个组件 （important | oneday | tomorrow */
+  const { mark } = props
+  /* 初始化useState，管理tasks数据 */
+  const [task, setTask] = useState({
+    oneday: [{ id: 1, text: "今天周五，我在图书馆写代码" }]
+  })
+
+  /* 处理用户输入的tsak，并更新state */
+  function getTask(e) {
+    const { target, keyCode } = e
+    /* 如果按下的按键不是回车键，或者输入的内容为空的话，不执行下步操作 */
+    if (keyCode !== 13 || target.value.trim() === "") return
+    /* 一个task数组 */
+    const taskObj = {id:2, text: target.value}
+    /* 更新对应mark的state， */
+    setTask({[mark]:[taskObj, ...task[mark]]})
+  }
   return (
     <div className="taskcontainer">
       <div className="AddTask">
@@ -12,7 +29,7 @@ export default function TaskList() {
             </svg>
           </div>
           <div className="Add-input">
-            <input type="text" placeholder="添加任务" />
+            <input type="text" placeholder="添加任务" onKeyUp={getTask} />
           </div>
         </div>
         <div className="AddFunc">
@@ -24,189 +41,23 @@ export default function TaskList() {
         </div>
       </div>
       <div className="TaskList">
-        <div className="TaskItem">
-          <div className="iscompleted">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-round-blue"></use>
-            </svg>
-          </div>
-          <span className="task">hello</span>
-          <div className="iscollected">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-shoucang"></use>
-            </svg>
-          </div>
-        </div>
-        <div className="TaskItem">
-          <div className="iscompleted">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-round-blue"></use>
-            </svg>
-          </div>
-          <span className="task">hello</span>
-          <div className="iscollected">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-shoucang"></use>
-            </svg>
-          </div>
-        </div>
-        <div className="TaskItem">
-          <div className="iscompleted">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-round-blue"></use>
-            </svg>
-          </div>
-          <span className="task">hello</span>
-          <div className="iscollected">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-shoucang"></use>
-            </svg>
-          </div>
-        </div>
-        <div className="TaskItem">
-          <div className="iscompleted">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-round-blue"></use>
-            </svg>
-          </div>
-          <span className="task">hello</span>
-          <div className="iscollected">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-shoucang"></use>
-            </svg>
-          </div>
-        </div>
-        <div className="TaskItem">
-          <div className="iscompleted">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-round-blue"></use>
-            </svg>
-          </div>
-          <span className="task">hello</span>
-          <div className="iscollected">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-shoucang"></use>
-            </svg>
-          </div>
-        </div>
-        <div className="TaskItem">
-          <div className="iscompleted">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-round-blue"></use>
-            </svg>
-          </div>
-          <span className="task">hello</span>
-          <div className="iscollected">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-shoucang"></use>
-            </svg>
-          </div>
-        </div>
-        <div className="TaskItem">
-          <div className="iscompleted">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-round-blue"></use>
-            </svg>
-          </div>
-          <span className="task">hello</span>
-          <div className="iscollected">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-shoucang"></use>
-            </svg>
-          </div>
-        </div>
-        <div className="TaskItem">
-          <div className="iscompleted">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-round-blue"></use>
-            </svg>
-          </div>
-          <span className="task">hello</span>
-          <div className="iscollected">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-shoucang"></use>
-            </svg>
-          </div>
-        </div>
-        <div className="TaskItem">
-          <div className="iscompleted">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-round-blue"></use>
-            </svg>
-          </div>
-          <span className="task">hello</span>
-          <div className="iscollected">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-shoucang"></use>
-            </svg>
-          </div>
-        </div>
-        <div className="TaskItem">
-          <div className="iscompleted">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-round-blue"></use>
-            </svg>
-          </div>
-          <span className="task">hello</span>
-          <div className="iscollected">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-shoucang"></use>
-            </svg>
-          </div>
-        </div>
-        <div className="TaskItem">
-          <div className="iscompleted">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-round-blue"></use>
-            </svg>
-          </div>
-          <span className="task">hello</span>
-          <div className="iscollected">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-shoucang"></use>
-            </svg>
-          </div>
-        </div>
-        <div className="TaskItem">
-          <div className="iscompleted">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-round-blue"></use>
-            </svg>
-          </div>
-          <span className="task">hello</span>
-          <div className="iscollected">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-shoucang"></use>
-            </svg>
-          </div>
-        </div>
-        <div className="TaskItem">
-          <div className="iscompleted">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-round-blue"></use>
-            </svg>
-          </div>
-          <span className="task">hello</span>
-          <div className="iscollected">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-shoucang"></use>
-            </svg>
-          </div>
-        </div>
-        <div className="TaskItem">
-          <div className="iscompleted">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-round-blue"></use>
-            </svg>
-          </div>
-          <span className="task">hello</span>
-          <div className="iscollected">
-            <svg className="icon" aria-hidden="true">
-              <use xlinkHref="#icon-shoucang"></use>
-            </svg>
-          </div>
-        </div>
-        
+        {task.oneday.map(taskObj => {
+          return (
+            <div className="TaskItem" key={taskObj.id}>
+              <div className="iscompleted">
+                <svg className="icon" aria-hidden="true">
+                  <use xlinkHref="#icon-round-blue"></use>
+                </svg>
+              </div>
+              <span className="task">{taskObj.text}</span>
+              <div className="iscollected">
+                <svg className="icon" aria-hidden="true">
+                  <use xlinkHref="#icon-shoucang"></use>
+                </svg>
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
   )

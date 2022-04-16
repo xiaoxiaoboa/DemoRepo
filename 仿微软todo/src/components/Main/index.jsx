@@ -1,11 +1,11 @@
 import React from "react"
 import { useRoutes, NavLink } from "react-router-dom"
 import routes from "../../routes"
+import Dark from '../Dark'
 import "./index.css"
 
 export default function Main() {
   const element = useRoutes(routes)
-
   return (
     <div className="main">
       <div className="SideBar-box">
@@ -57,18 +57,16 @@ export default function Main() {
         <div className="placeholder-sidebox">
           <div className="setting-box">
             <div className="setting">
-              <svg className="icon" aria-hidden="true">
-                <use xlinkHref="#icon-shezhi"></use>
-              </svg>
+              <Dark />
             </div>
           </div>
         </div>
         <div></div>
       </div>
       <div className="show-box">
-          {/* <div className="toolbar">toolebar</div>
+        {/* <div className="toolbar">toolebar</div>
           <div className="taskcontainer">taskcontainer</div> */}
-          {element}
+        {element}
       </div>
     </div>
   )
