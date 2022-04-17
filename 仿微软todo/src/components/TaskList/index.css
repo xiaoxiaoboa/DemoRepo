@@ -86,12 +86,17 @@
     flex: 1 1 0;
     user-select: none;
 }
-.iscollected{
+.iscollected, .delete{
     font-size: 18px;
     padding: 10px;
     color: #909090;
 }
 .iscollected .icon:hover{
+  cursor: pointer;
+  color: #000;
+  
+}
+.delete .icon:hover{
   cursor: pointer;
   color: #000;
   

@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react"
+import React, { useReducer, useEffect, useState } from "react"
 import { nanoid } from "nanoid"
 import "./index.css"
 // import Test from "./useReducer模拟"
@@ -7,7 +7,7 @@ import "./index.css"
 const reducer = (state, action) => {
   switch (action.type) {
     case "increment":
-      return [...state, action.data]
+      return [action.data, ...state]
     case "decrement":
       const newArr = state.filter(obj => {
         obj.id !== action.data.id
@@ -17,6 +17,7 @@ const reducer = (state, action) => {
       return state
   }
 }
+
 export default function TaskList(props) {
   /* 接收props，mark标志了是谁正在使用这个组件 （important | oneday | tomorrow */
   const { mark } = props
@@ -73,11 +74,16 @@ export default function TaskList(props) {
     /* 清空输入框 */
     target.value = ""
 
-    /* 先把taskObj推入数组再存入localStorage */
-    // localStorage.setItem("task" + `.${mark}`, JSON.stringify(TaskArr))
   }
-
-  return <Render AddTask={handleAddTask} item={selectAction({ mark })} />
+  function handleDeleteShow(){
+    
+  }
+  const myProps = {
+    AddTask: handleAddTask,
+    item: selectAction({ mark }),
+    handleDeleteShow,
+  }
+  return <Render {...myProps}/>
 }
 
 /* 渲染组件 */
@@ -115,6 +121,11 @@ function Render(props) {
                 </svg>
               </div>
               <span className="task">{taskObj.text}</span>
+              <div className="delete">
+                <svg className="icon" aria-hidden="true">
+                  <use xlinkHref="#icon-shanchu"></use>
+                </svg>
+              </div>
               <div className="iscollected">
                 <svg className="icon" aria-hidden="true">
                   <use xlinkHref="#icon-shoucang"></use>
