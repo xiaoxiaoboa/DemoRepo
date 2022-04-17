@@ -2,7 +2,7 @@ import React from "react"
 import "./index.css"
 
 export default function TasksToolBar(props) {
-  const {title,mark} = props
+  const {title} = props
   return (
     <div className="toolbar">
       <div className="title-tool">

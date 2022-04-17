@@ -23,7 +23,7 @@ export default function Header() {
       <div className="avatar">
         <img
           className="avatar-img"
-          src="https://cdn.jsdelivr.net/gh/xiaoxiaoboa/blog-pic@main/avatar.6i50zenvqzc0.webp"
+          src="/avatar.png"
         />
       </div>
     </header>
