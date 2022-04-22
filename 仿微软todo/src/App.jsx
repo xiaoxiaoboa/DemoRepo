@@ -1,8 +1,7 @@
 import React from "react"
 import Header from "./components/Header"
-import Main from "./components/Main"
 import SideBar from "./components/SideBar"
-
+import Routes from "./routes"
 import "./App.css"
 
 export default function App() {
@@ -11,7 +10,7 @@ export default function App() {
       <Header />
       <div className="body">
         <SideBar />
-        <Main />
+        <Routes />
       </div>
     </div>
   )

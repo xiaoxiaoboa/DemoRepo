@@ -16,15 +16,15 @@ export default function SideBar() {
       <div className="list-box">
         <ul className="list">
           <NavLink to={`/oneday`}>
-            <li className="list-item">
-              <div>
-                <svg className="icon" aria-hidden="true">
-                  <use xlinkHref="#icon-taiyang"></use>
-                </svg>
-              </div>
-              <div className="oneday">我的一天</div>
-              <div className="count">1</div>
-            </li>
+          <li className="list-item">
+            <div>
+              <svg className="icon" aria-hidden="true">
+                <use xlinkHref="#icon-taiyang"></use>
+              </svg>
+            </div>
+            <div className="oneday">我的一天</div>
+            <div className="count">1</div>
+          </li>
           </NavLink>
           <NavLink to={`/tomorrow`}>
             <li className="list-item">
