@@ -1,66 +1,20 @@
-import React, { useReducer, useEffect } from "react"
-import Add from '../Add'
-import List from '../List'
+import React, { useEffect } from "react"
+import Add from "../Add"
+import List from "../List"
 import { nanoid } from "nanoid"
+import formatDate from "./getDate"
 import "./index.css"
 
-/* useReducer的reducer */
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "increment":
-      return [action.data, ...state]
-    case "decrement":
-      return [
-        state.filter(obj => {
-          obj.id !== action.data.id
-        })
-      ]
-    default:
-      return state
-  }
-}
+export default function Task(props) {
+  /* 接收props，mark标志了是谁正在使用这个组件 （important | oneday | tomorrow 
+    tasks和setTask，是父组件传来的useState属性
+  */
+  const { tasks, setTask, mark } = props
 
-export  function Task(props) {
-  /* 接收props，mark标志了是谁正在使用这个组件 （important | oneday | tomorrow */
-  const { mark } = props
-
-  /* 初始化useReducer，管理tasks数据 */
-  const [oneday, setOneday] = useReducer(reducer, init())
-  const [tomorrow, setTomorrow] = useReducer(reducer, init())
-  const [important, setImportant] = useReducer(reducer, init())
-
-  /* 使用useEffect钩子，监控这三个模块的state，一旦改变就 */
+  /* 使用useEffect钩子，监控state，一旦改变就存储 */
   useEffect(() => {
-    localStorage.setItem(
-      "task" + `.${mark}`,
-      JSON.stringify(selectAction({ mark }))
-    )
-  }, [oneday, tomorrow, important])
-
-  function selectAction(target) {
-    /* 选择出使用哪个action 
-    target: {
-        mark,
-        action: { type: "increment", data: { id: 1, text: "hello" } }
-      }
-    */
-    const { mark, action } = target
-    switch (mark) {
-      case "oneday":
-        return action ? setOneday(action) : oneday
-      case "tomorrow":
-        return action ? setTomorrow(action) : tomorrow
-      case "important":
-        return action ? setImportant(action) : important
-      default:
-        break
-    }
-  }
-
-  /* 初始化useReducer */
-  function init() {
-    return JSON.parse(localStorage.getItem("task" + `.${mark}`)) ?? []
-  }
+    localStorage.setItem("task" + `.${mark}`, JSON.stringify(tasks))
+  }, [tasks])
 
   /* 处理用户输入的task，并更新useReducer */
   function handleAddTask(e) {
@@ -69,31 +23,20 @@ export  function Task(props) {
     if (keyCode !== 13 || target.value.trim() === "") return
 
     /* 一个task对象 */
-    const taskObj = { id: nanoid(), text: target.value, date: Date.now()}
+    const taskObj = { id: nanoid(), title: target.value, date: formatDate() }
 
     /* 更新对应mark的state， */
-    selectAction({ mark, action: { type: "increment", data: taskObj } })
+    // selectAction({ mark, action: { type: "increment", data: taskObj } })
+    setTask([taskObj, ...tasks])
     /* 清空输入框 */
     target.value = ""
   }
 
-  /* 声明props，统一传递 */
-  const myProps = {
-    AddTask: handleAddTask,
-    item: selectAction({ mark })
-    // handleDeleteShow
-  }
-  
-  return <Render {...myProps} />
-}
 
-/* 渲染组件 */
-function Render(props) {
-  const { AddTask, item } = props
   return (
     <div className="taskcontainer">
-      <Add AddTask={AddTask} />
-      <List item={item}/>
+      <Add AddTask={handleAddTask} />
+      <List tasks={tasks} />
     </div>
   )
 }
