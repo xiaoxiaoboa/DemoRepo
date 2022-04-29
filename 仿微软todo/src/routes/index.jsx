@@ -1,6 +1,7 @@
 import OneDay from "../pages/OneDay"
 import Tomorrow from "../pages/Tomorrow"
 import Important from "../pages/Important"
+import AllTasks from "../pages/AllTasks"
 import { Navigate, useRoutes } from "react-router-dom"
 
 import React from "react"
@@ -18,6 +19,10 @@ export default function Routes() {
     {
       path: "/important",
       element: <Important />
+    },
+    {
+      path: "/alltasks",
+      element: <AllTasks />
     },
     {
       path: "/",

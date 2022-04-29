@@ -1,3 +1,5 @@
-@media (prefers-color-scheme: dark) {
-  
+.switchtheme {
+  font-size: 26px;
+  cursor: pointer;
 }
+

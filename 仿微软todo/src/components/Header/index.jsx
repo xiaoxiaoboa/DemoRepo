@@ -1,7 +1,9 @@
 import React from 'react'
+import Dark from "../Dark"
 import './index.css'
 
 export default function Header() {
+  // console.log('Header')
   return (
     <header className="header">
       {/* 标题 */}
@@ -18,6 +20,9 @@ export default function Header() {
             placeholder="输入关键词进行搜索"
           />
         </div>
+      </div>
+      <div className='theme'>
+        <Dark />
       </div>
       {/* 头像 */}
       <div className="avatar">

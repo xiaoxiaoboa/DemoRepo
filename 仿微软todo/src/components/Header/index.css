@@ -41,6 +41,11 @@
 }
 .input::placeholder {
   color: #ccc;
+  user-select: none;
+}
+
+.theme{
+  padding: 0 24px 0;
 }
 
 .avatar{
