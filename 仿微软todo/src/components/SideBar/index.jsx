@@ -1,8 +1,6 @@
 import React from "react"
-
 import { NavLink } from "react-router-dom"
 import "./index.css"
-
 import tasksState from "../../Recoil/tasks"
 import { useRecoilValue } from "recoil"
 
@@ -65,6 +63,7 @@ export default function SideBar() {
               <div className="count">{0}</div>
             </li>
           </NavLink>
+          
         </ul>
       </div>
       <div className="placeholder-sidebox">

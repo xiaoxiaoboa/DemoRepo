@@ -1,7 +1,8 @@
+import {lazy} from 'react'
 import OneDay from "../pages/OneDay"
-import Tomorrow from "../pages/Tomorrow"
-import Important from "../pages/Important"
-import AllTasks from "../pages/AllTasks"
+const Tomorrow = lazy(() => import("../pages/Tomorrow"))
+const Important = lazy(() => import("../pages/Important"))
+const AllTasks = lazy(() => import("../pages/AllTasks"))
 import { Navigate, useRoutes } from "react-router-dom"
 
 import React from "react"
@@ -24,6 +25,7 @@ export default function Routes() {
       path: "/alltasks",
       element: <AllTasks />
     },
+    
     {
       path: "/",
       element: <Navigate to="/oneday" />

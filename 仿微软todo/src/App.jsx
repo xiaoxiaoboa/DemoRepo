@@ -1,8 +1,7 @@
-import React from "react"
+import React, { Suspense } from "react"
 import Header from "./components/Header"
 import SideBar from "./components/SideBar"
 import Routes from "./routes"
-
 
 import "./App.css"
 
@@ -13,7 +12,9 @@ export default function App() {
       <Header />
       <div className="body">
         <SideBar />
-        <Routes />
+        <Suspense fallback={<>Loading...</>}>
+          <Routes />
+        </Suspense>
       </div>
     </div>
   )

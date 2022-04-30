@@ -2,8 +2,9 @@ import React from "react"
 import "./index.css"
 
 export default function List(props) {
-  const { tasks, RemoveTask } = props
+  const { tasks, removeTask, addToImportant } = props
 
+  // console.log(tasks)
   return (
     <div className="TaskList">
       {tasks.map(taskObj => {
@@ -17,24 +18,23 @@ export default function List(props) {
                   }></use>
               </svg>
             </div>
-            <span
-              className={
-                taskObj.isComplated ? "task del-line" : "task"
-              }>
+            <span className={taskObj.isComplated ? "task del-line" : "task"}>
               {taskObj.title}
             </span>
-            <div
-              className="delete"
-              onClick={() => {
-                RemoveTask(taskObj.id)
-              }}>
+            <div className="delete" onClick={() => removeTask(taskObj.id)}>
               <svg className="icon" aria-hidden="true">
                 <use xlinkHref="#icon-shanchu"></use>
               </svg>
             </div>
-            <div className="iscollected">
+            <div
+              className="iscollected"
+              onClick={() => addToImportant(taskObj.id)}>
               <svg className="icon" aria-hidden="true">
-                <use xlinkHref="#icon-shoucang"></use>
+                {/* <use xlinkHref="#icon-shoucang"></use> */}
+                <use
+                  xlinkHref={
+                    taskObj.isCollected ? "#icon-shoucang1" : "#icon-shoucang"
+                  }></use>
               </svg>
             </div>
           </div>
