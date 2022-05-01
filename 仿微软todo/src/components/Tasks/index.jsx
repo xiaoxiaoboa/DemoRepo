@@ -27,13 +27,17 @@ export default function Tasks(props) {
     /* 一个task对象 */
     const taskObj = {
       id: nanoid(),
-      flag: null,
       title: target.value,
       isComplated: false,
-      isCollected: false,
+      isCollected: mark === "important" ? true : false,
+      from: mark,
       date: formatDate()
     }
-
+    /* mark === "oneday"
+          ? "我的一天"
+          : mark === "tomorrow"
+          ? "明日待办"
+          : "重要" */
     //更新state，传递一个对象，包含mark，和数据对象
     // setTask(increment({ mark, data: taskObj }))
     setTask({ ...tasks, [mark]: [taskObj, ...tasks[mark]] })
@@ -49,66 +53,72 @@ export default function Tasks(props) {
 
     setTask({ ...tasks, [mark]: newArr })
   }
-  /* 添加任务到重要 */
-  function addToImportant(id) {
-    /* 新的task对象 */
-    let newObj
-    /* 旧的task对象 */
-    let oldObj
-    /* 新tasks数组 */
-    let newArr
-    /* 记录就对象的ID */
-    let flag
 
-    tasks[mark].forEach(task => {
-      /* 找出点击的那个task,若没有被设为重要就设为重要 */
-      if (task.id === id && !task.isCollected) {
-        /* 新建一个task,只改变了id,因为设为重要后,对象内的isCollected字段需要修改 */
-        oldObj = createObj(task)
-        /* 新的task对象,需要添加到important,对象中额外保存了旧对象的ID,在取消重要时使用 */
-        newObj = createObj(task, oldObj.id)
-        /* 删除所在界面点击的那个task,并生成新的task对象和新的数组,重新设置state */
-        newArr = tasks[mark].filter(task => {
-          return task.id !== id
+  /* 添加任务到重要和取消 */
+  function addToImportant(id) {
+    /* 取回localstorage里整个对象 */
+    const currentTaskObj = JSON.parse(localStorage.getItem("All_tasks"))
+
+    /* 遍历相应的数组 */
+    currentTaskObj[mark].forEach(markValue => {
+      /* 如果点击的那个task还没有被设为重要 */
+      if (markValue.id === id && !markValue.isCollected) {
+        /* 生成新ID */
+        markValue.id = nanoid()
+
+        /* 被设为重要 */
+        markValue.isCollected = true
+
+        /* 如果不在'重要'页面 */
+        if (mark !== "important") {
+          /* 给important数组开头添加,添加时要生成新ID */
+          currentTaskObj[`important`].unshift({
+            ...markValue,
+            id: nanoid(),
+            prevId: markValue.id
+          })
+        }
+
+        /* 更新state */
+        setTask(currentTaskObj)
+        return
+      } else if (markValue.id === id && markValue.isCollected) {
+        /* 如果被点击的task已经被设为重要 ,就是要取消重要*/
+        if (markValue.from === "important") return removeTask(id) 
+        /* 先把'重要'界面的相应的task删除 */
+        const newArr = currentTaskObj[`important`].filter(impValue => {
+          return markValue.id !== impValue.prevId
         })
-        /* 设置state */
-        setTask({
-          ...tasks,
-          [`important`]: [newObj, ...tasks[`important`]],
-          [mark]: [oldObj, ...newArr]
-        })
-      }
-      /* 若被设为重要,就取消重要 */
-      if (task.isCollected) {
-        /* 找到那个旧ID相同的task,删除并生成新的数组 */
-        const newArr = tasks[`important`].filter(task => {
-          return task.flagId === id
-        })
-        /* 设置新的数组时,还要将本界面的task重新设置,因为图标需要变化 */
-        if (newArr.length < 1) return
-        setTask({
-          ...tasks,
-          [`important`]: newArr,
-          [mark]: [createObj(task), ...newArr]
-        })
+        currentTaskObj.important = newArr
+
+        /* 取消点击task的那个页面的task的重要 */
+        markValue.isCollected = false
+
+        /* 如果取消重要时所在的位置是'重要'页面,并且这个tasks来自其他页面 */
+        if (mark === "important" && markValue.from !== "important") {
+          /* 从这个task所属页面找到它 */
+          const prevObj = currentTaskObj[markValue.from].find(
+            item => item.id === markValue.prevId
+          )
+
+          /* 取消重要 */
+          prevObj.isCollected = false
+
+          /* 删除'重要'页面这个task, 从'重要'页面find和点击的那个task的id相同id的task,然后删除,1表示只删除匹配到的第一个*/
+          currentTaskObj[`important`].splice(
+            currentTaskObj[`important`].findIndex(
+              obj => obj.id === markValue.id
+            ),
+            1
+          ) 
+        }
+
+        /* 更新state */
+        setTask(currentTaskObj)
+        return
       }
     })
-
-    /* 生成所需的对应的对象 */
-    function createObj(task, flagId) {
-      const obj = {
-        id: nanoid(),
-        flag: flagId ? flagId : null,
-        title: task.title,
-        isComplated: task.isComplated,
-        isCollected: task.isCollected ? !task.isCollected : true,
-        date: task.date
-      }
-      flag = obj.id
-      return obj
-    }
   }
-
   return (
     <div className="taskcontainer">
       <Add AddTask={addTask} />
@@ -116,6 +126,7 @@ export default function Tasks(props) {
         tasks={tasks[mark]}
         removeTask={removeTask}
         addToImportant={addToImportant}
+        mark={mark}
       />
     </div>
   )
