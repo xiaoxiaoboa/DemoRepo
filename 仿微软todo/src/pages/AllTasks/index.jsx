@@ -1,13 +1,14 @@
-import React, { useRef, lazy, Suspense } from "react"
+import React, { useRef } from "react"
 import { useRecoilValue } from "recoil"
-import uncompleted from "../../Recoil/uncompleted"
-import completed from "../../Recoil/completed"
+import tasksSelector from "../../Recoil/selector/tasksSelector"
 import TasksToolBar from "../../components/TasksToolBar"
 import "./index.css"
 
 export default function AllTasks() {
-  console.log("AllTasks")
-  return (
+  // console.log("AllTasks") 
+
+  
+  return (  
     <div className="show">
       <TasksToolBar mark={`alltasks`} title={`任务`} />
       <hr />
@@ -18,10 +19,10 @@ export default function AllTasks() {
 
 function ViewTasks() {
   // console.log("ViewTasks")
-  const uncompleted_task = useRecoilValue(uncompleted)
-  const completed_task = useRecoilValue(completed)
+  const {unCompleted, completed} = useRecoilValue(tasksSelector)
   const myRef = useRef(null)
 
+  // console.log(completed)
   /* 计算list最大高度 */
   function max_height() {
     const { current } = myRef
@@ -55,28 +56,6 @@ function ViewTasks() {
     }
   }
 
-  //#region reg
-  // /* 把所有task合并到一个数组 */
-  // function combineArr() {
-  //   let newArr = []
-  //   Object.values(tasks).forEach(value => {
-  //     newArr = [...newArr, ...value]
-  //   })
-  //   return newArr
-  // }
-  // /* 过滤出未完成task */
-  // function fliterUncomplated() {
-  //   return combineArr().filter(value => {
-  //     return value.isComplated === false
-  //   })
-  // }
-  // /* 过滤出已完成task */
-  // function fliterComplated() {
-  //   return combineArr().filter(value => {
-  //     return value.isComplated === true
-  //   })
-  // }
-//#endregion
   return (
     <div className="drawertitleaskcontainer">
       <div className="uncomplated drawer">
@@ -85,9 +64,9 @@ function ViewTasks() {
             <use xlinkHref="#icon-youjiantou_huaban"></use>
           </svg>
           <div className="drawertitle">未完成</div>
-          <div className="uncomplatedCount">{0}</div>
+          <div className="uncomplatedCount">{unCompleted.length}</div>
         </div>
-        <ShowList type={uncompleted_task} />
+        <ShowList type={unCompleted} />
       </div>
 
       <div className="complated drawer">
@@ -96,9 +75,9 @@ function ViewTasks() {
             <use xlinkHref="#icon-youjiantou_huaban"></use>
           </svg>
           <div className="drawertitle">已完成</div>
-          <div className="fliterComplatedCount">{0}</div>
+          <div className="fliterComplatedCount">{completed.length}</div>
         </div>
-        <ShowList type={completed_task} />
+        <ShowList type={completed} />
       </div>
 
       <div className="timeout drawer">
@@ -122,15 +101,15 @@ function ShowList(props) {
       {type.map(taskObj => {
         return (
           <div className="TaskItem" key={taskObj.id}>
-            <div className="iscompleted">
+            <div className="iscompleted disabled">
               <svg className="icon" aria-hidden="true">
                 <use
                   xlinkHref={
-                    taskObj.isComplated ? "#icon-wancheng" : "#icon-round-blue"
+                    taskObj.isCompleted ? "#icon-wancheng" : "#icon-round-blue"
                   }></use>
               </svg>
             </div>
-            <span className={taskObj.isComplated ? "task del-line" : "task"}>
+            <span className={taskObj.isCompleted ? "task del-line" : "task"}>
               {taskObj.title}
             </span>
           </div>

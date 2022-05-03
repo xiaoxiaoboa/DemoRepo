@@ -13,7 +13,7 @@
   align-items: center;
   height: 43px;
   padding: 0 5px 0;
-  cursor: pointer;
+  /* cursor: pointer; */
   font-size: 14px;
   box-shadow: 0px 1px 0px #cdcbcb59;
 }
@@ -23,7 +23,9 @@
 .iscompleted {
   padding: 10px;
   font-size: 24px;
+  cursor: pointer;
 }
+
 .task {
   flex: 1 1 0;
   user-select: none;
@@ -33,17 +35,22 @@
   font-size: 18px;
   padding: 10px;
   color: #909090;
-}
-.iscollected .icon:hover {
   cursor: pointer;
-  color: #000;
 }
-.delete .icon:hover {
-  cursor: pointer;
+.iscollected :hover {
   color: #000;
 }
 
-.del-line{
+.disabled {
+  cursor: not-allowed !important;
+}
+
+.delete .icon:hover {
+  color: #000;
+}
+
+.del-line {
   text-decoration-line: line-through;
   color: #ccc;
 }
+

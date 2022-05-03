@@ -60,7 +60,6 @@ export default function SideBar() {
                 </svg>
               </div>
               <div className="important">任务</div>
-              <div className="count">{0}</div>
             </li>
           </NavLink>
           
