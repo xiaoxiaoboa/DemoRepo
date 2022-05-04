@@ -1,0 +1,1 @@
+import{j as s,a,T as t,b as r}from"./index.e4d323be.js";function m(){return s("div",{className:"show",children:[a(t,{mark:"important",title:"\u91CD\u8981"}),a(r,{mark:"important"})]})}export{m as default};
