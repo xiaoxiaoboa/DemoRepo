@@ -1,0 +1,79 @@
+.sidebarContainer{
+  flex: 1;
+}
+
+.sidebarWrapper{
+  /* display: flex;
+  flex-direction: column; */
+  height: 100%;
+  align-items: center;
+  border-right: 1px dashed rgba(145, 158, 171, 0.24);
+  position: relative;
+}
+
+.logo{
+  text-align: center;
+}
+
+.logImg{
+  width: 90px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.loginedUser{
+  display: flex;
+  align-items: center;
+  /* width: 80%; */
+  background-color: #edeff1;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 10px 25px 20px 25px ;
+}
+
+.loginedUserName{
+  font-weight: 700;
+  margin-left: 20px;
+  color: #696676;
+}
+
+
+.sidebarList{
+  /* width: 100%; */
+  height: 100%;
+}
+
+.list{
+  padding: 10px;
+  list-style: none;
+}
+.listItem{
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: #e8eef7;
+  cursor: pointer;
+}
+.listItem:hover{
+  background-color: #f0f2f4;
+}
+.itemName{
+  margin-left: 20px;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+.active{
+  background-color: #e8eef7;
+  font-weight: 600;
+}
+
+.darkMode{
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}

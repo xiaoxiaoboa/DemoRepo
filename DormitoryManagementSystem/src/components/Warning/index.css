@@ -1,0 +1,10 @@
+.warn{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: red;
+  font-weight: 600;
+}
+.warnImg{
+  width: 200px;
+}
