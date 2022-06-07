@@ -29,6 +29,11 @@ export default function Topbar() {
     logo.current.className = "cdlogo rotatepause"
   }
 
+  /* 歌曲加载完成后，释放createObjectURL创建的对象 */
+  const handleLoad = ({ target: { src } }) => {
+    URL.revokeObjectURL(src)
+  }
+
   return (
     <div className="topbarcontainer">
       <label htmlFor="file">
@@ -53,6 +58,7 @@ export default function Topbar() {
         */}
         <audio
           src={playing ? URL.createObjectURL(playing) : ""}
+          onLoadedMetadata={handleLoad}
           controls
           onEnded={handleShuffle}
           autoPlay={true}
