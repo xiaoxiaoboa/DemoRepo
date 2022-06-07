@@ -11,6 +11,7 @@ export default function Topbar() {
 
   /* 导入文件夹后，把里面的歌曲放进state中 */
   const handleImport = ({ target: { files } }) => {
+    if (files.length < 1) return
     dispatch(files)
   }
 
@@ -29,7 +30,6 @@ export default function Topbar() {
     logo.current.className = "cdlogo rotatepause"
   }
 
-  /* 歌曲加载完成后，释放createObjectURL创建的对象 */
   const handleLoad = ({ target: { src } }) => {
     URL.revokeObjectURL(src)
   }

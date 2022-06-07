@@ -9,7 +9,7 @@ export default function Right() {
   /* isSearch:是否处于搜索状态，value:搜索的值 */
   const [searching, setSeach] = useState("")
   /* 由于state是FileList类型，转换成数组后方便map遍历，去除非音频文件（本想用input做限制，结果它不生效）*/
-  const songs = Array.from(state).filter(song => song.type !== '')
+  const songs = Array.from(state)
 
   /* 随机播放歌曲 */
   const handleShuffle = () => {
