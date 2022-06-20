@@ -1,0 +1,41 @@
+.categorydetails {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.covertop {
+  display: flex;
+  height: 360px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.covertopImg {
+  border-radius: 10px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.coverdesc {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.575);
+  position: absolute;
+  border-radius: 10px;
+}
+
+.coverdesctext{
+  width: 50%;
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.coverdesctext > p{
+  font-weight: 300;
+}
+

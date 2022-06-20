@@ -1,0 +1,81 @@
+.introduce {
+  display: flex;
+  /* align-items: center; */
+  gap: 20px;
+}
+
+.cover {
+  padding: 10px;
+}
+
+.coverImg {
+  height: 500px;
+  border-radius: 10px;
+  -webkit-box-shadow: 11px 7px 24px -1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 11px 7px 24px -1px rgba(0, 0, 0, 0.75);
+  box-shadow: 11px 7px 24px -1px rgba(0, 0, 0, 0.75);
+}
+
+.detail{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding: 10px; */
+  gap: 15px;
+}
+
+.filmname{
+  font-size: 50px;
+  text-align: center;
+}
+
+.filmdesc{
+  font-size: 26px;
+  font-weight: normal;
+}
+
+.filmdetail{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  font-size: 20px;
+}
+
+.filmtype{
+  display: flex;
+  gap: 30px;
+  font-size: 18px;
+}
+
+.filmtypeItem{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filmtypeItemImg{
+  width: 30px;
+}
+
+.topcast{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.casts{
+  display: flex;
+}
+.cast{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  text-align: center;
+}
+
+.castImg{
+  width: 100px;
+  border-radius: 8px;
+}
+
